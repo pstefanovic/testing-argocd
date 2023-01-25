@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:pstefanovic/testing-argocd.git
+    repoURL: https://github.com/pstefanovic/testing-argocd.git
     path: argo1
-    targetRevision: HEAD
+    targetRevision: main
     directory:
       recurse: true
   destination:
