@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mock-demo
+  namespace: argo2
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:nikolay-krivko/dp-poc-post-sync.git
+    path: apps/mock-demo
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

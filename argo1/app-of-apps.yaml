@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo1-app-of-apps
+  namespace: argo1
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:pstefanovic/testing-argocd.git
+    path: argo1
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      jsonPointers:
+        - /spec/syncPolicy/automated/selfHeal
+        - /spec/syncPolicy/automated/prune
+        - /spec/syncPolicy/automated
