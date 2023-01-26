@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: project
+  namespace: argo1
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destinations:
+    - name: "in-cluster"
+      namespace: "argo1"
+    - name: "in-cluster"
+      namespace: "argo2"
+    - name: "in-cluster"
+      namespace: "apps"
+  sourceRepos:
+    - "https://github.com/pstefanovic/testing-argocd"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"

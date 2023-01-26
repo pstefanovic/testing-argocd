@@ -2,11 +2,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: mock-demo
-  namespace: argo2
+  namespace: argo1
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: project
   source:
     repoURL: https://github.com/pstefanovic/testing-argocd.git
     path: apps/mock-demo
@@ -18,4 +18,3 @@ spec:
     automated:
       selfHeal: true
       prune: true
-
